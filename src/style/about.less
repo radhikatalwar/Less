@@ -1,0 +1,155 @@
+/* IMPORT */
+@import "./import.less";
+
+/* Variable */
+@font-size: 20px;
+
+/* Nested Rules */
+
+.container {
+  h1 {
+    /* Operation */
+    font-size: @font-size * 2;
+    color: #e45456;
+  }
+  p {
+    font-size: 25px;
+    /* Logical Functions  */
+    color: if((2 < 1) or (false), red, black); // And or OR
+  }
+  /* Nested Rules & Bubbling */
+
+  .myclass {
+    h1 {
+      font-size: 25px;
+      color: red;
+
+      @media screen {
+        color: blue;
+        @media (min-width: 1024px) {
+          color: green;
+        }
+      }
+    }
+    p {
+      font-size: 25px;
+      color: #3c7949;
+    }
+  }
+}
+
+/* MIXINS */
+
+.p1 {
+  color: red;
+}
+
+.p2 {
+  background: #64d9c0;
+  .p1();
+}
+
+.p3 {
+  background: blue;
+  .p1;
+}
+
+/* PARAMETRIC MIXINS */
+
+.border(@width, @style, @color) {
+  border: @width @style @color;
+}
+
+.myheader {
+  .border(2px, dashed, green);
+}
+
+/* MIXIN GUARDS */
+
+/* .mixin (@a) when (lightness(@a) >= 50%) {
+  font-size: 14px;
+}
+
+.mixin (@a) when (lightness(@a) < 50%) {
+  font-size: 16px;
+}
+
+.mixin (@a) {
+  color: @a;
+}
+
+.class1 {
+  .mixin(#FF0000);
+}
+
+.class2 {
+  .mixin(#555); */
+/* } */
+
+/* CSS GUARDS */
+
+/* @usedScope: global; */
+.mixin(@used) {
+  /* @usedScope: mixin; */
+  .cont when (@used = global) {
+    background-color: red;
+    color: black;
+  }
+
+  .style when (@used = mixin) {
+    background-color: blue;
+    color: white;
+  }
+}
+.mixin(mixin);
+/* SCOPE */
+
+@a: 15px;
+
+.scopeClass {
+  font-size: @a;
+  /* @a: 20px; */
+  color: green;
+}
+
+/* EXTEND */
+
+h2 {
+  &:extend(.scopeClass);
+  font-style: italic;
+}
+
+.style {
+  background: green;
+}
+
+/*LOOP*/
+
+.cont(@count) when (@count > 0) {
+  width: (25px * @count);
+
+  .cont((@count - 1));
+}
+
+div {
+  .cont(7);
+} 
+
+/* PARENT SELECTORS */
+
+a {
+  color: #5882fa;
+  &:hover {
+    background-color: #a9f5f2;
+  }
+}
+/* MAP */
+#colors() {
+  primary: blue;
+  secondary: green;
+}
+
+.button {
+  color: #colors[primary];
+  border: 1px solid #colors[secondary];
+}

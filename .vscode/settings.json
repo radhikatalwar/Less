@@ -1,0 +1,9 @@
+{
+    "less.lint.argumentsInColorFunction": "ignore",
+    "less.lint.emptyRules": "ignore",
+    "less.lint.fontFaceProperties": "ignore",
+    "less.lint.hexColorLength": "ignore",
+    "less.lint.propertyIgnoredDueToDisplay": "ignore",
+    "less.lint.unknownAtRules": "ignore",
+    "less.lint.unknownProperties": "ignore"
+}
